@@ -3,5 +3,8 @@ kind: JWK
 metadata:
   name: jwk-sample
 spec:
-  # Add fields here
-  foo: bar
+  keyType: EC
+  curveParameter : P256
+  publicKeyUse: "sig"
+  expireDurationHours: 2
+  rotateDurationHoursBeforeExpired: 1

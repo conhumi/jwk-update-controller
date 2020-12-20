@@ -17,6 +17,7 @@ limitations under the License.
 package v1alpha1
 
 import (
+	corev1 "k8s.io/api/core/v1"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 )
 
@@ -25,17 +26,29 @@ import (
 
 // JWKSpec defines the desired state of JWK
 type JWKSpec struct {
-	// INSERT ADDITIONAL SPEC FIELDS - desired state of cluster
-	// Important: Run "make" to regenerate code after modifying this file
+	KeyType       string `json:"keyType"`
+	PublicKeyUse  string `json:"publicKeyUse,omitempty"`
+	KeyOperations string `json:"keyOperations,omitempty"`
 
-	// Foo is an example field of JWK. Edit JWK_types.go to remove/update
-	Foo string `json:"foo,omitempty"`
+	ExpireDurationHours              int32 `json:"expireDurationHours,omitempty"`
+	RotateDurationHoursBeforeExpired int32 `json:"rotateDurationHoursBeforeExpired,omitempty"`
+
+	// Parameters for 'EC' KeyType
+	CurveParameter string `json:"curveParameter,omitempty"`
+
+	// Parameters for 'RSA' KeyType
+	RSABitLength int32 `json:"rsaBitLength,omitempty"`
 }
 
 // JWKStatus defines the observed state of JWK
 type JWKStatus struct {
-	// INSERT ADDITIONAL STATUS FIELD - define observed state of cluster
-	// Important: Run "make" to regenerate code after modifying this file
+	JWKs []Secret `json:"jwks,omitempty"`
+}
+
+// Secret defines the state of JWK Stored secret
+type Secret struct {
+	SecretRef corev1.ObjectReference `json:"secretRef,omitempty"`
+	ExpireAt  string                 `json:"expireAt,omitempty"`
 }
 
 // +kubebuilder:object:root=true
