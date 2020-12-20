@@ -1,0 +1,7 @@
+apiVersion: juc.conhumi.net/v1alpha1
+kind: JWK
+metadata:
+  name: jwk-sample
+spec:
+  # Add fields here
+  foo: bar

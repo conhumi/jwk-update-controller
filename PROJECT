@@ -1,3 +1,7 @@
 domain: conhumi.net
 repo: github.com/conhumi/jwk-update-controller
+resources:
+- group: juc
+  kind: JWK
+  version: v1alpha1
 version: "2"
